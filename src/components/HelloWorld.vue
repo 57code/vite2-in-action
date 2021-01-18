@@ -1,7 +1,6 @@
 <template>
   <h1>{{ msg }}</h1>
-  <p>test brach add</p>
-  <button @click="state.count++">count is: {{ state.count }}</button>
+  <el-button @click="state.count++">count is: {{ state.count }}</el-button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
