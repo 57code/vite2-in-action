@@ -81,7 +81,7 @@ import {
   // ElScrollbar,
 } from "element3";
 
-export default function useElement3(app) {
+export default function (app) {
   // 完整引入
   // app.use(element3)
 
