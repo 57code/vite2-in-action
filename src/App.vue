@@ -1,6 +1,5 @@
 <script setup lang="jsx">
 import { defineComponent } from "vue";
-import HelloWorld from "comps/HelloWorld.vue";
 import logo from "./assets/logo.png";
 
 export default defineComponent({
