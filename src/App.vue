@@ -7,7 +7,7 @@ export default defineComponent({
   render: () => (
     <>
       <img alt="Vue logo" src={logo} />
-      <HelloWorld msg="Hello Vue 3 + Vite" />
+      <router-view></router-view>
     </>
   ),
 });

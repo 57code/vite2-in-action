@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HelloWorld></HelloWorld>
+    <HelloWorld msg="hello vue3 + vite"></HelloWorld>
   </div>
 </template>
 
