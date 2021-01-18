@@ -6,11 +6,11 @@ import { viteMockServe } from "vite-plugin-mock";
 export default {
   alias: {
     "@": path.resolve(__dirname, "src"),
-    // "/api/": path.resolve(__dirname, "src/api"),
     comps: path.resolve(__dirname, "src/components"),
+    "styles": path.resolve(__dirname, "src/styles"),
+    // "/api/": path.resolve(__dirname, "src/api"),
     // "/dirs/": path.resolve(__dirname, "src/directive"),
     // "/views/": path.resolve(__dirname, "src/views"),
-    // "/styles/": path.resolve(__dirname, "src/styles"),
     // "/layout/": path.resolve(__dirname, "src/layout"),
     // "/utils/": path.resolve(__dirname, "src/utils"),
   },
