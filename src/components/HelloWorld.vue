@@ -1,5 +1,6 @@
 <template>
   <h1>{{ msg }}</h1>
+  <p>{{$store.state.counter}}</p>
   <el-button @click="state.count++">count is: {{ state.count }}</el-button>
   <p>
     Edit

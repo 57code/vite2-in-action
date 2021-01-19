@@ -1,10 +1,10 @@
 // 完整引入
-// import element3 from "element3";
-// import "element3/lib/theme-chalk/index.css";
+import element3 from "element3";
+import "element3/lib/theme-chalk/index.css";
 
 // 按需引入
-import "element3/lib/theme-chalk/button.css";
-import {
+// import "element3/lib/theme-chalk/button.css";
+// import {
   // ElRow,
   // ElCol,
   // ElContainer,
@@ -13,7 +13,7 @@ import {
   // ElAside,
   // ElMain,
   // ElIcon,
-  ElButton,
+  // ElButton,
   // ElLink,
   // ElRadio,
   // ElRadioButton,
@@ -79,12 +79,12 @@ import {
   // ElInfiniteScroll,
   // ElDrawer,
   // ElScrollbar,
-} from "element3";
+// } from "element3";
 
 export default function (app) {
   // 完整引入
-  // app.use(element3)
+  app.use(element3)
 
   // 按需引入
-  app.use(ElButton);
+  // app.use(ElButton);
 }

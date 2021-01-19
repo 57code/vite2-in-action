@@ -10,4 +10,7 @@ import element3 from "plugins/element3";
 // router
 import router from "@/router";
 
-createApp(App).use(element3).use(router).mount("#app");
+// store
+import store from '@/store'
+
+createApp(App).use(element3).use(router).use(store).mount("#app");
