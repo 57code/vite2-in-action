@@ -1,5 +1,7 @@
 <template>
   <div class="navbar">
+    <!-- 面包屑 -->
+    <!-- 右侧下拉菜单 -->
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
