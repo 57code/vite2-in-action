@@ -10,6 +10,7 @@
     "js-yaml": "^4.0.0",
     "mockjs": "^1.1.0",
     "path": "^0.12.7",
+    "path-to-regexp": "^6.2.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0-rc.2"

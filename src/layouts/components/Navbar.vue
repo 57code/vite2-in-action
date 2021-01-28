@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
     <!-- 面包屑 -->
+    <breadcrumb class="breadcrumb-container"></breadcrumb>
+
     <!-- 右侧下拉菜单 -->
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
@@ -20,7 +22,9 @@
     </div>
   </div>
 </template>
-
+<script setup>
+import Breadcrumb from "./Breadcrumb.vue";
+</script>
 <style lang="scss" scoped>
 .navbar {
   height: 50px;
@@ -28,6 +32,10 @@
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
+  .breadcrumb-container {
+    float: left;
+  }
 
   .right-menu {
     float: right;
