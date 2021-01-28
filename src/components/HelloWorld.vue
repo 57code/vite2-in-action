@@ -10,12 +10,21 @@
 
 <script setup>
 import { defineProps, reactive } from "vue";
+import request from 'utils/request'
 
 defineProps({
   msg: String,
 });
 
 const state = reactive({ count: 0 });
+
+try {
+  const users = await request('/users')
+  console.log(users);
+  
+} catch (error) {
+  console.log(error);
+}
 </script>
 
 <style scoped>
