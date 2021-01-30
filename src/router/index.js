@@ -1,5 +1,5 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import Layout from 'layouts/index.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
+import Layout from "layouts/index.vue";
 
 /**
  * Note: 子菜单仅当路由的children.length >= 1时才出现
@@ -20,46 +20,74 @@ import Layout from 'layouts/index.vue'
  */
 export const routes = [
   {
-    path: '/',
-    redirect: '/home',
+    path: "/",
+    redirect: "/home",
     component: Layout,
     meta: { title: "导航", icon: "el-icon-s-home" },
     children: [
       {
         path: "home",
-        component: () => import('views/home.vue'),
+        component: () => import("views/home.vue"),
         name: "Home",
         meta: { title: "首页", icon: "el-icon-s-home" },
         children: [
           {
             path: ":id",
-            component: () => import('views/detail.vue'),
+            component: () => import("views/detail.vue"),
             name: "Detail",
             hidden: true,
-            meta: { title: "详情", icon: "el-icon-s-home", activeMenu: '/home' },
+            meta: {
+              title: "详情",
+              icon: "el-icon-s-home",
+              activeMenu: "/home",
+            },
           },
-        ]
-      }
+        ],
+      },
     ],
   },
 
   {
-    path: "/a",
+    path: "/users",
     component: Layout,
+    meta: {
+      title: "玩家管理",
+      icon: "el-icon-user-solid",
+    },
     children: [
       {
-        path: "",
-        component: () => import('views/home.vue'),
-        name: "PageA",
-        meta: { title: "页面A", icon: "el-icon-s-home" },
-      }
+        path: "list",
+        component: () => import("views/users/list.vue"),
+        meta: {
+          title: "用户列表",
+          icon: "el-icon-document",
+        },
+      },
+      {
+        path: "create",
+        component: () => import("views/users/create.vue"),
+        meta: {
+          title: "创建用户",
+          icon: "el-icon-edit",
+        },
+      },
+      {
+        path: "edit/:id(\\d+)",
+        name: "userEdit",
+        component: () => import("views/users/edit.vue"),
+        hidden: true,
+        meta: {
+          title: "编辑用户信息",
+          activeMenu: "/users/list",
+        },
+      },
     ],
   },
-]
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 });
 
-export default router
+export default router;
