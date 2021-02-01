@@ -53,10 +53,10 @@
 <script>
 import { toRefs } from "vue";
 import { useRouter } from "vue-router";
-import { Msgbox, Message } from "element3";
+import { Message } from "element3";
 import Pagination from "comps/Pagination.vue";
-import fetchData from "./model/userModel";
-import request from 'utils/request'
+import { useList } from "./model/userModel";
+
 export default {
   name: "UserList",
   components: {
@@ -65,7 +65,7 @@ export default {
   setup() {
     // 玩家列表数据
     const router = useRouter();
-    const { state, getList, delItem } = fetchData("/users");
+    const { state, getList, delItem } = useList();
 
     // 用户更新
     function handleEdit({ row }) {
@@ -76,33 +76,12 @@ export default {
     }
 
     // 删除玩家
-    function handleDelete({ $index, row }) {
-      // Msgbox.confirm("确定删除当前玩家信息？", "警告", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      // }).then(async () => {
-      //   delItem(row.id, $index).then(() => {
-      //     // 通知用户
-      //     Message.success("删除成功！");
-      //   });
-      // });
-
-      // delItem(row.id, $index).then(() => {
-      //     // 通知用户
-      //     Message.success("删除成功！");
-      //   });
-
-      request({
-        url: '/users/' + row.id,
-        method: "delete",
-      })
-        .then(() => {
-          console.log("删除成功");
-        })
-        .catch((error) => {
-          debugger
-          console.log(error);
-        });
+    function handleDelete({ row }) {
+      delItem(row.id).then(() => {
+        // todo:删除这一行，或者重新获取数据
+        // 通知用户
+        Message.success("删除成功！");
+      });
     }
 
     return {

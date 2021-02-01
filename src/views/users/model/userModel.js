@@ -1,7 +1,7 @@
-import { reactive } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import request from "utils/request";
 
-export default function (url) {
+export function useList() {
   // 列表数据
   const state = reactive({
     loading: true, // 加载状态
@@ -18,43 +18,76 @@ export default function (url) {
     state.loading = true;
 
     return request({
-      url,
+      url: "/getUsers",
       method: "get",
       params: state.listQuery,
     })
       .then(({ data, total }) => {
         // 设置列表数据
         state.list = data;
-        state.loading = false;
         state.total = total;
       })
-      .catch(() => {
-        console.log(error);
+      .finally(() => {
+        state.loading = false;
       });
   }
 
   // 删除项
-  function delItem(id, idx) {
+  function delItem(id) {
     state.loading = true;
 
     return request({
-      url,
-      method: "delete",
+      url: "/deleteUser",
+      method: "get",
       params: { id },
-    })
-      .then(() => {
-        state.loading = false;
-        // 从数据中删除当前行
-        state.list.splice(idx, 1);
-      })
-      .catch((error) => {
-        console.log(error);
-        state.loading = false;
-      });
+    }).finally(() => {
+      state.loading = false;
+    });
   }
 
   // 首次获取数据
   getList();
 
   return { state, getList, delItem };
+}
+
+const defaultData = {
+  name: "",
+  age: undefined,
+};
+
+export function useItem(isEdit, id) {
+  const model = ref(Object.assign({}, defaultData));
+
+  // 初始化时，根据isEdit判定是否需要获取玩家详情
+  onMounted(() => {
+    if (isEdit && id) {
+      // 获取玩家详情
+      request({
+        url: "/getUser",
+        method: "get",
+        params: { id },
+      }).then(({ data }) => {
+        model.value = data;
+      });
+    }
+  });
+
+  const updateUser = () => {
+    return request({
+      url: "/updateUser",
+      method: "post",
+      data: model.value,
+    });
+  };
+
+  const addUser = () => {
+    return request({
+      url: "/addUser",
+      method: "post",
+      data: model.value,
+    });
+  };
+
+  return { model, updateUser, addUser };
 }

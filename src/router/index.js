@@ -51,9 +51,10 @@ export const routes = [
     path: "/users",
     component: Layout,
     meta: {
-      title: "玩家管理",
+      title: "用户管理",
       icon: "el-icon-user-solid",
     },
+    redirect: '/users/list',
     children: [
       {
         path: "list",
@@ -66,9 +67,10 @@ export const routes = [
       {
         path: "create",
         component: () => import("views/users/create.vue"),
+        hidden: true,
         meta: {
-          title: "创建用户",
-          icon: "el-icon-edit",
+          title: "创建新用户",
+          activeMenu: "/users/list",
         },
       },
       {

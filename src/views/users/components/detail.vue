@@ -1,25 +1,12 @@
 <template>
   <div class="container">
-    <el-form ref="form" :model="playerForm" :rules="rules">
-      <el-form-item prop="accountname" label="账户名称">
-        <el-input v-model="playerForm.accountname"></el-input>
+    <el-form ref="form" :model="model" :rules="rules">
+      <el-form-item prop="name" label="用户名">
+        <el-input v-model="model.name"></el-input>
       </el-form-item>
-      <el-form-item prop="nickname" label="用户昵称">
-        <el-input v-model="playerForm.nickname"></el-input>
+      <el-form-item prop="age" label="用户年龄">
+        <el-input v-model.number="model.age"></el-input>
       </el-form-item>
-
-      <!-- 上传组件 -->
-      <el-upload
-        action="/api/upload"
-        class="avatar-uploader"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
-      >
-        <img v-if="imageUrl" :src="imageUrl" />
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-      </el-upload>
-
       <el-form-item>
         <el-button @click="submitForm" type="primary">提交</el-button>
       </el-form-item>
@@ -27,21 +14,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { useNotify, Message } from "element3";
-import { ElUploadInternalFileDetail } from "element3/types/upload";
-import { defineComponent, onMounted, reactive, ref, unref } from "vue";
+<script>
+import { Message } from "element3";
+import { reactive, ref } from "vue";
 import { useRoute } from "vue-router";
-import { createPlayer, getPlayer, updatePlayer } from "../../../api/players";
-import { Player } from "../../../api/types";
+import { useItem } from "../model/userModel";
 
-const defaultPlayerData: Player = {
-  accountname: "",
-  nickname: "",
-  avatar: "",
-};
-
-export default defineComponent({
+export default {
   props: {
     isEdit: {
       type: Boolean,
@@ -49,107 +28,53 @@ export default defineComponent({
     },
   },
   setup(props) {
-    // 表单数据
-    const playerForm = ref<Player>(Object.assign({}, defaultPlayerData));
-
-    // 获取路由
+    // 路由
     const route = useRoute();
-
-    // 初始化时，根据isEdit判定是否需要获取玩家详情
-    onMounted(() => {
-      if (props.isEdit) {
-        const id = route.params.id + "";
-        if (id) {
-          fetchData(parseInt(id));
-        }
-      }
-    });
-
-    // 获取玩家详情
-    async function fetchData(id: number) {
-      try {
-        const { data } = await getPlayer(id);
-        playerForm.value = data.player;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    // 提交表单
-    const loading = ref(false); // 加载状态
-    const form = ref<any>(null);
+    const { model, addUser, updateUser } = useItem(props.isEdit, route.params.id);
     const rules = reactive({
-      accountname: [{ required: true, message: "用户名为必填项" }],
-      nickname: [{ required: true, message: "昵称为必填项" }],
+      // 校验规则
+      name: [{ required: true, message: "用户名为必填项" }],
     });
 
+    // 表单实例
+    const form = ref(null);
+    // 提交表单
     function submitForm() {
       // 校验
-      form.value.validate(async (valid: boolean) => {
+      form.value.validate((valid) => {
         if (valid) {
-          loading.value = true;
-
           // 提交
-          try {
-            if (props.isEdit) {
-              await updatePlayer(playerForm.value.id, unref(playerForm));
-            } else {
-              await createPlayer(unref(playerForm));
-            }
-
-            // 操作成功提示信息
-            useNotify().success({
-              title: "操作成功",
-              message: "新增玩家数据成功",
-              duration: 2000,
+          if (props.isEdit) {
+            updateUser().then(() => {
+              // 操作成功提示信息
+              Message.success({
+                title: "操作成功",
+                message: "更新用户数据成功",
+                duration: 2000,
+              });
             });
-
-            // 加载状态还原
-            loading.value = false;
-          } catch (error) {
-            console.error(error);
+          } else {
+            addUser().then(() => {
+              // 操作成功提示信息
+              Message.success({
+                title: "操作成功",
+                message: "新增玩家数据成功",
+                duration: 2000,
+              });
+            });
           }
         }
       });
     }
 
-    // 图片上传
-    const imageUrl = ref("");
-
-    // 校验
-    function beforeAvatarUpload(file: ElUploadInternalFileDetail) {
-      const isLt1M = file.size / 1024 / 1024 < 1;
-
-      if (!isLt1M) {
-        Message({
-          message: "上传头像图片大小不能超过1Mb！",
-          type: "error",
-        });
-      }
-
-      return isLt1M;
-    }
-
-    // 上传成功预览
-    function handleAvatarSuccess(resp: any, file: ElUploadInternalFileDetail) {
-      console.log(resp);
-
-      // 预览
-      imageUrl.value = URL.createObjectURL(file.raw);
-      playerForm.value.avatar = file.name;
-    }
-
     return {
-      playerForm,
-      form,
+      model,
       rules,
+      form,
       submitForm,
-      imageUrl,
-      beforeAvatarUpload,
-      handleAvatarSuccess,
     };
   },
-});
+};
 </script>
 
 <style scoped>

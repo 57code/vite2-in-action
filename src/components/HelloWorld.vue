@@ -17,14 +17,6 @@ defineProps({
 });
 
 const state = reactive({ count: 0 });
-
-try {
-  const users = await request('/users')
-  console.log(users);
-  
-} catch (error) {
-  console.log(error);
-}
 </script>
 
 <style scoped>
