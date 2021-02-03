@@ -1,16 +1,10 @@
-<script setup lang="jsx">
-import { defineComponent } from "vue";
-import HelloWorld from "comps/HelloWorld.vue";
-import logo from "./assets/logo.png";
+<template>
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <HelloWorld msg="Hello Vue 3 + Vite" />
+</template>
 
-export default defineComponent({
-  render: () => (
-    <>
-      <img alt="Vue logo" src={logo} />
-      <HelloWorld msg="Hello Vue 3 + Vite" />
-    </>
-  ),
-});
+<script setup>
+import HelloWorld from "@/components/HelloWorld.vue";
 </script>
 
 <style>
