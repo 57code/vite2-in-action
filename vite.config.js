@@ -1,7 +1,8 @@
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import path from "path";
-import { viteMockServe } from "vite-plugin-mock";
+// import { viteMockServe } from "vite-plugin-mock";
+import viteMockServe from "./plugins/vite-plugin-mock";
 
 export default {
   alias: {
@@ -15,5 +16,5 @@ export default {
     apis: path.resolve(__dirname, "src/apis"),
     dirs: path.resolve(__dirname, "src/directives"),
   },
-  plugins: [vue(), vueJsx(), viteMockServe({ supportTs: false })],
+  plugins: [vue(), vueJsx(), viteMockServe()],
 };
