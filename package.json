@@ -1,6 +1,7 @@
 {
   "name": "vite2-in-action",
   "version": "0.0.0",
+  "license": "ISC",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
     "build": "vite build"
@@ -10,19 +11,20 @@
     "element3": "0.0.39",
     "js-yaml": "^4.0.0",
     "mockjs": "^1.1.0",
-    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
     "path-to-regexp": "^6.2.0",
+    "process": "^0.11.10",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.3",
-    "vuex": "^4.0.0-rc.2"
+    "vue-router": "^4.0.4",
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.0.4",
-    "@vitejs/plugin-vue-jsx": "^1.0.2",
+    "@vitejs/plugin-vue": "^1.1.4",
+    "@vitejs/plugin-vue-jsx": "^1.1.0",
     "@vue/compiler-sfc": "^3.0.5",
     "cross-env": "^7.0.3",
-    "sass": "^1.32.4",
-    "vite": "^2.0.0-beta.12",
-    "vite-plugin-mock": "^2.0.0-beta.3"
+    "sass": "^1.32.8",
+    "vite": "^2.0.1",
+    "vite-plugin-mock": "^2.1.4"
   }
 }

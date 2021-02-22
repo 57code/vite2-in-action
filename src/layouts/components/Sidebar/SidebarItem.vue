@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import path from "path";
+import path from "path-browserify";
 import Item from "./Item.vue";
 import AppLink from "./Link.vue";
 import { isExternal } from "utils/validate";
