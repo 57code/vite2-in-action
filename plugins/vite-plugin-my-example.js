@@ -2,6 +2,7 @@ export default function myExample () {
   // 返回的是插件对象
   return {
     name: 'my-example', // 名称用于警告和错误展示
+    // enforce: 'pre'|'post'
     // 初始化hooks，只走一次
     options(opts) {
       console.log('options', opts);
