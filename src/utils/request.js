@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Message, Msgbox } from "element3";
-import store from "@/store";
+import store from "/@/store";
 
 // 创建axios实例
 const service = axios.create({

@@ -22,7 +22,7 @@
 import SidebarItem from "./SidebarItem.vue";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { routes } from "@/router";
+import { routes } from "/@/router";
 import variables from "styles/variables.module.scss";
 
 const activeMenu = computed(() => {

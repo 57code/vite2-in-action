@@ -8,9 +8,9 @@ import "styles/index.scss";
 import element3 from "plugins/element3";
 
 // router
-import router from "@/router";
+import router from "/@/router";
 
 // store
-import store from '@/store'
+import store from '/@/store'
 
 createApp(App).use(element3).use(router).use(store).mount("#app");
